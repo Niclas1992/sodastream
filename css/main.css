@@ -1,0 +1,1166 @@
+body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header + Menü */
+
+
+.toggle-menu {
+    position: fixed;
+    height: 70px;
+    width: 70px;
+    right: 10px;
+    top: 5px;
+    z-index: 4;
+}
+
+.toggle-menu span {
+    display: block;
+    width: 35px;
+    height: 3.5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #0086BF;
+    transition: .5s;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-menu span:nth-child(1) {
+    transform: translate(-50%,-50%) translateY(-10px);
+    transition: 1s;  
+}
+
+.toggle-menu span:nth-child(4) {
+    transform: translate(-50%,-50%) translateY(10px);
+    transition: 1s;  
+}
+
+.toggle-menu.active span:nth-child(1) {
+    transform: translate(-50%,-50%) translateY(-20px);
+    opacity: 0;  
+}
+
+.toggle-menu.active span:nth-child(4) {
+    transform: translate(-50%,-50%) translateY(20px); 
+    opacity: 0;   
+}
+
+.toggle-menu.active span:nth-child(2) {
+    transform: translate(-50%,-50%) rotate(45deg);
+    transition-delay: .6s;
+    transition: 2s;
+}
+
+.toggle-menu.active span:nth-child(3) {
+    transform: translate(-50%,-50%) rotate(-45deg); 
+    transition-delay: .6s;
+    transition: 2s;
+}
+
+.menu-box-mobile {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    padding-top: 140px;
+
+    height: 100vh;
+    width: 70vw;
+    top: 0;
+    right: 0;
+    background-color: #BFCBD9;
+    z-index: 2;
+    transform: translate(100%, 0);
+    transition: transform 1000ms ease-in-out, opacity 2500ms ease-in-out;
+    opacity: 0;
+    box-shadow: -5px 0px 3px rgba(0, 0, 0, 0.1);
+
+}
+
+.menu-box-mobile.is-from-right {
+    transform: translate(100%, 0);
+    transition: transform 800ms ease-in-out, opacity 2200ms ease-in-out;
+}
+
+.menu-box-mobile.is-expanded {
+    transform: translate(0, 0);
+    opacity: 1;
+    transition: transform 1200ms ease-in-out, opacity 200ms ease-in-out;
+}
+
+.menu-box-mobile__nav__element__link {
+    color: white;
+    font-size: 1.8em;
+    line-height: 2.2em;
+}
+
+.menu-box-mobile__nav__login {
+    color: white;
+    font-size: 1.1em;
+    padding-bottom: 60px;
+
+}
+
+.menu-box-mobile__nav__login--img {
+    width: 35px;
+    margin-right: 40px;
+}
+
+
+
+.menu-box {
+    position: fixed;
+    height: 80px;
+    background-color: white;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    padding-top: 0;
+    z-index: 3;
+}
+
+ul {
+    list-style: none;
+}
+
+.menu-box__nav {
+    list-style: none;
+    margin-top: 0px;
+    padding-top: 25px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.menu-box__nav__login--img {
+    height: 25px;
+}
+
+.menu-box__nav__element {
+    visibility: hidden;
+}
+
+.menu-box__nav__element__link {
+    color: #0086BF;
+}
+
+.menu-box__nav__login {
+    visibility: hidden;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+
+/* STARTSEITE + WARUM WASSER */
+
+
+
+.content-box__stage {
+    height: 100vh;
+    width: 100vw;
+    background-color: #FF8980;
+}
+
+.content-box--variation__stage {
+    height: 100vh;
+    width: 100vw;
+
+    background-image: url("../images/ocean-stage.png");
+    background-size:     cover;             
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+.content-box__stage__image {
+    margin-left: -80px;
+    margin-top: 25vh;
+    padding-bottom: 5vh;
+}
+
+.content-box__stage__text {
+    margin-top: 50%;
+}
+
+.content-box--variation__stage__text {
+    margin-top: 20vh;
+}
+#content-box__stage__text--headline {
+    color: white;
+}
+
+#content-box--variation__stage__text--headline {
+    color: #FF8980;
+}
+
+#content-box__stage__text--info-text,
+#content-box--variation__stage__text--info-text {
+    color: white;
+    font-size: 1.6em;
+}
+
+#content-box--variation__stage__text--info-text {
+    margin-top: 60px;
+}
+
+.content-box__wasser-links {
+    background-color: #BFCBD9;    
+    height: 400px;
+}
+
+.content-box__wasser-links__text {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.content-box__wasser-links__text--headline {
+    font-size: 6em;
+    color: white;
+    margin-bottom: 0;
+    padding-top: 50px;
+}
+
+.content-box--variation__wasser__text--headline {
+    color: #0086BF;
+    margin-top: 80px;
+}
+
+.content-box--variation__wasser-infos__text--headline{
+    color: #0086BF;
+    margin-top: 80px;
+    font-size: 1.8em;
+    font-weight: normal;
+}
+
+.content-box__wasser-links__text--text {
+    font-size: 2.5em;
+    color: white;
+    margin-top: 0;
+    padding-bottom: 50px;
+    line-height: 1.2em;
+}
+
+.content-box--variation__wasser__text--text {
+    margin-top: 40px;
+    font-size: 1.3em;
+}
+
+.content-box--variation__wasser-infos__text--text {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    font-size: 1.3em;
+}
+
+.content-box--variation__sodastream--image {
+    margin-bottom: 30px;
+    z-index: -1;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+  }
+  
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100vw;
+}
+
+.content-box__wasser-rechts {
+    height: 580px;
+}
+
+#content-box__wasser-rechts__text--headline {
+    color: #0086BF;
+    padding-right: 50px;
+    padding-top: 50px;    
+    padding-bottom: 20px;
+}
+
+#content-box__wasser-rechts__text--info-text {
+    color: #0086BF;
+    font-size: 1.6em;
+    padding-bottom: 20px;
+}
+
+.content-box__section__image img{
+    height: 280px;
+    width: 100vw;
+    object-fit: cover;
+}
+
+.content-box__überblick__text {
+    height: 300px;
+    margin-bottom: 50px;
+}
+
+.content-box__überblick__text--headline {
+    color: #0086BF;
+    padding-top: 50px;    
+    padding-bottom: 20px;
+}
+
+.content-box__überblick__text--info-text {
+    color: #0086BF;
+    font-size: 1.6em;
+}
+
+.content-box__überblick__app-info__image1 {
+    margin-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+.content-box__überblick__app-info__image2 {
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+.content-box__überblick__app-info__punkt--icon {
+    margin-top: 50px;
+    height: 20px;
+}
+
+.content-box__überblick__app-info__punkt--1,
+.content-box__überblick__app-info__punkt--2, 
+.content-box__überblick__app-info__punkt--3,    
+.content-box__überblick__app-info__punkt--4, 
+.content-box__überblick__app-info__punkt--5 {
+    font-size: 1.9em;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.content-box__teaser-text-box {
+    background-color: #FF8980;
+    padding-bottom: 65px;
+    padding-top: 70px;
+}
+
+#content-box__teaser-text-box__headline {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.content-box__teaser-text-box__text-box {
+    color: white;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+.content-box--variation__wasser-infos--blue {
+    background-color: #BFCBD9;
+}
+
+.content-box--variation__wasser-infos--b_w {
+    background-color: #BFCBD9;
+}
+
+.content-box--variation__wasser-infos--w_b {
+    background-color: white;
+}
+
+
+/* Registrierung + Login */
+
+
+
+.error {
+    font-size: 1.1em;
+    color:#f00;
+    margin-left: 25px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.content-box__registrierung,
+.content-box__registrierung-2,
+.content-box__login {
+    background-color: white;
+    height: 700px;
+}
+
+#content-box__registrierung__headline {
+    font-size: 1.9em;
+    color: #0086BF;
+    margin-bottom: 60px;
+    margin-top: 100px;
+}
+
+#content-box__login__headline {
+    font-size: 1.9em;
+    color: #0086BF;
+    margin-bottom: 60px;
+    margin-top: 120px;
+}
+
+#content-box__registrierung-2__headline {
+    font-size: 1.9em;
+    color: #FF8980;
+    margin-bottom: 60px;
+    margin-top: 100px;
+}
+
+input {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+
+    border: 1px solid #0086BF;
+}
+
+input::placeholder {
+    color: #BFCBD9;
+    font-size: 1.2em;
+}
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #BFCBD9;
+    font-size: 1.2em;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: #BFCBD9;
+    font-size: 1.2em;
+}
+
+input:-ms-input-placeholder { /* IE 10+ */
+    color: #BFCBD9;
+    font-size: 1.2em;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: #BFCBD9;
+    font-size: 1.2em;
+}
+
+input[type=submit] {
+    background: #0086BF;
+    color: white;
+    font-size: 1.3em;
+    margin-bottom: 40px;
+}
+
+#sign-up, 
+#sign-in {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+#content-box__login__text {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+#content-box--variation__wasser-infos__text--löschen {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#save {
+    background-color: #FF8980;
+    border: none;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+#content-box__login__text {
+    font-size: 1.6em;
+}
+
+#content-box__login__text--link {
+    color: #FF8980;
+    text-decoration: underline;
+}
+
+
+
+/* WEB-APP + PROFILSEITE */
+
+
+
+.content-box__web-app__header {
+    position: fixed;
+    height: 200px;
+    width: 100vw;
+    background-color: #FF8980;
+    z-index: 1;
+}
+
+#content-box__web-app__header__nav {
+    visibility: hidden;
+}
+
+.content-box__web-app__header__headline {
+    color: white;
+    font-size: 1.8em;
+    margin-top: 115px;
+}
+
+.content-box__web-app__übersicht--headline,
+.content-box__profil--headline {
+    margin-top: 100px;
+    visibility: hidden;
+}
+
+.content-box__web-app__übersicht--circle {
+    width: 100%;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    padding: 20% 0;
+    border: 10px solid #0086BF;
+}
+
+.content-box__web-app__übersicht {
+    margin-top: 40px;
+}
+
+.content-box__web-app__übersicht--circle-prozent {
+    font-size: 3em;
+}
+
+.content-box__web-app__übersicht--zahlen {
+    margin-top: -40px;
+}
+
+.content-box__web-app__übersicht--bisher-text,
+.content-box__web-app__übersicht--ziel-text {
+    font-size: 1.6em;
+}
+
+.content-box__web-app__übersicht--bisher-output,
+.content-box__web-app__übersicht--ziel-output {
+    font-size: 3em;
+}
+
+.content-box__web-app__wassermenge {
+    background-color: #BFCBD9;
+}
+
+.content-box__web-app__wassermenge--headline {
+    color: #0086BF;
+    margin-top: 80px;
+    font-size: 1.8em;
+    font-weight: normal;
+}
+
+.content-box__profil__veränderung--headline {
+    color: #0086BF;
+    margin-top: 10px;
+    font-size: 1.8em;
+    font-weight: normal;
+}
+
+#content-box--variation__wasser-infos__text--löschen {
+    font-size: 1.4em;
+    margin-bottom: 60px;
+}
+
+.content-box__web-app__wassermenge__eingabe-box--glas__form--input,
+.content-box__web-app__wassermenge__eingabe-box--bottle__form--input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: -10px;
+}
+
+.content-box__web-app__wassermenge__eingabe-box--glas__form--submit,
+.content-box__web-app__wassermenge__eingabe-box--bottle__form--submit {
+    margin-left: -10px;
+}
+
+.content-box__web-app__wassermenge__eingabe-box--bottle__form {
+    padding-top: 15px;
+}
+
+#input-glas, #input-bottle, #input-height, #input-weight {
+    background-color: #FF8980;
+    border: none;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.content-box__web-app__wassermenge__eingabe-box--glas__image {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+
+.content-box__web-app__wassermenge__eingabe-box--bottle__image {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.content-box__profil__veränderung--headline,
+.content-box__profil__wasserkonsum--headline  {
+    margin-bottom: 50px;
+}
+
+
+
+.content-box__profil__veränderung__form {
+    margin-top: 10px;
+}
+
+.content-box__profil__veränderung--aktuell {
+    font-size: 3em;
+    padding-left: -10px;
+    margin-top: -15px;
+    margin-bottom: 30px;
+}
+
+.linie { 
+    color:red;  
+    width:200px; 
+    height: 5px;
+    } 
+
+
+/* FOOTER */
+
+
+
+.footer__wrapper {
+    width: 100%;
+    background-color: #0086bf;
+    z-index: -1;
+    padding-top: 80px;
+}
+
+.footer-box__links__social-media__icon {
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 25px;
+    margin-bottom: 20px;
+    height: 55px;
+    width: 25px;
+}
+
+#footer-box__headline {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.4em;
+    font-weight: normal;
+    margin-bottom: 20px; 
+}
+
+.footer-box__nav-list--one, .footer-box__nav-list--two, .footer-box__nav-list--three {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.footer-box__nav-list--one {
+    margin-top: 0px;
+}
+
+.footer-box__nav-list--two {
+    padding-bottom: 15px;
+}
+
+.footer-box__nav-list--three {
+    margin-bottom: 80px;
+}
+
+footer nav a {
+    color: white;
+    font-size: 1.6em;
+}
+
+
+
+/* GLOBAL BUTTON STYLES */
+
+
+
+.button--blue {
+    background-color: #0086BF;
+
+    transition: box-shadow 200ms;
+    color: white;
+}
+
+.button--blue:hover {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+}
+
+
+
+
+
+/* BUTTON STYLES */
+
+
+
+.button--jetzt-registrieren {
+    font-size: 1.3em;
+    height: 50px;
+    width: 210px;
+}
+
+.button--registrierung--submit {
+    font-size: 1.3em;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.button--wasser-info {
+    font-size: 1.3em;
+    height: 50px;
+    width: 210px;
+}
+
+
+
+/* MEDIA QUERYS FOR MIDDLE SCREENS */
+
+
+@media print, screen and (min-width: 40em) {
+
+
+    
+    /* MENU */
+    
+        .toggle-menu {
+            position: fixed;
+            visibility: hidden;
+        }
+
+        .menu-box {
+            height: 80px;
+            background-color: white;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .menu-box__nav__login {
+            visibility: visible !important;
+        }
+
+        .menu-box__nav__element {
+            font-size: 1.3em;
+            visibility: visible !important;
+        }
+        
+        .menu-box__nav__logo--img {
+            max-width: 130px;
+        }       
+
+
+
+    /* MAIN STARTSEITE + WARUM WASSER */
+
+
+
+        .content-box__stage__image {
+            margin-left: 16.66666%;
+
+        }
+
+        .content-box__stage__text {
+            margin-top: 30%;
+        }
+
+        .content-box--variation__stage__text {
+            margin-top: 20%;
+        }
+
+        #content-box__stage__text--headline,
+        #content-box--variation__stage__text--headline,
+        .content-box--variation__wasser__text--headline {
+            font-size: 3.2em;
+        }
+
+        
+        #content-box__stage__text--info-text,
+        #content-box--variation__stage__text--info-text {
+            font-size: 1.8em;
+        }
+
+        .content-box__wasser-links,
+        .content-box--variation__wasser {
+            width: 50vw;
+        }
+
+        .content-box--variation__wasser__text--text {
+            font-size: 1.6em;
+        }
+
+        .content-box--variation__wasser-infos__text--text {
+            font-size: 1.6em;
+        }
+
+        .content-box--variation__wasser-infos__text--headline {
+            font-size: 2.2em;
+        }
+
+
+        .content-box--variation__sodastream--image {
+            margin-top: 60px;
+            z-index: -1;
+        }
+
+        .content-box__wasser-rechts {
+            height: 440px;
+        }
+        
+        .content-box__wasser-links__text--headline {
+            font-size: 7em;
+            padding-top: 35px;
+        }
+  
+        .content-box__wasser-links__text--text {
+            font-size: 2.5em;
+            line-height: 1.4em;
+        }
+
+        #content-box__wasser-rechts__text--info-text {
+            font-size: 1.8em;
+        }
+
+        #content-box__wasser-rechts__text--headline {
+            font-size: 3.2em;
+            padding-right: 20px;
+        }
+
+        .content-box__wasser-rechts__text {
+            padding-bottom: 30px;
+        }
+
+        .content-box__section__image img{
+            height: 330px;
+        }
+
+        .content-box__überblick__text--headline {
+            font-size: 3.2em;
+        }
+        
+        .content-box__überblick__text--info-text {
+            font-size: 1.8em;
+        }
+
+        .content-box__überblick__app-info--punkt1 {
+            font-size: 1.8em;
+        }
+
+        .content-box__überblick__app-info__punkte2 {
+            padding-top: 12%;
+            padding-bottom: 12%;
+        }
+
+        #content-box__teaser-text-box__headline {
+            font-size: 3.2em
+        }
+        
+        .content-box__teaser-text-box__text-box {
+            font-size: 1.8em;
+        }
+
+
+    /* WEB-APP + PROFILSEITE */
+
+
+        .content-box__web-app__header {
+            visibility: visible;
+            position: fixed;
+            height: 140px;
+            width: 100vw;
+            background-color: #FF8980;
+        }
+
+        #content-box__web-app__header__nav {
+            visibility: visible;
+            margin-top: -58px;
+            color: white;
+            font-size: 1.4em;
+            margin-left: -20px;
+        }
+
+        .content-box__web-app__header__headline {
+            visibility: hidden;
+        }
+        
+        .content-box__web-app__übersicht--headline,
+        .content-box__profil--headline {
+            margin-top: 100px;
+            visibility: visible;
+        }
+
+        .content-box__profil--headline {
+            margin-top: 200px;
+            margin-bottom: 0px;
+        }
+
+        .content-box__web-app__übersicht--circle {
+            width: 100%;
+            border-radius: 50%;
+            text-align: center;
+            position: relative;
+            padding: 11% 0;
+            border: 12px solid #0086BF;
+            margin-top: 30px;
+        }
+
+        .content-box__web-app__übersicht--circle-prozent {
+            font-size: 3.5em;
+        }
+
+        .content-box__web-app__wassermenge__eingabe-box--bottle__form {
+            padding-top: 55px;
+            padding-bottom: 45px;
+        }
+
+        .content-box__web-app__wassermenge__eingabe-box--glas {
+            margin-top: 80px;
+        }
+
+        .content-box__profil__veränderung--headline {
+            margin-top: 40px;
+        }
+
+        .content-box__profil__veränderung--aktuell {
+            margin-bottom: 10px;
+        }
+
+        .content-box__profil__veränderung__form {
+            margin-top: 80px;
+        }
+
+        .content-box__profil__wasserkonsum--headline {
+            margin-top: 30px;
+        }
+
+
+    /* REGISTRIERUNG + LOGIN */
+
+
+
+
+        .error {
+            margin-left: 65px;
+        }
+
+        input {
+            margin-right: 40px;
+            margin-left: 40px;
+        }
+
+        .content-box__registrierung,
+        .content-box__registrierung-2,
+        .content-box__login {
+            height: 100vh;
+        }
+        
+        #content-box__registrierung__headline,
+        #content-box__registrierung-2__headline{
+            margin-top: 0px;
+        }
+
+        #content-box__login__headline {
+            margin-top: 200px;
+        }
+
+
+
+
+
+    /* FOOTER */
+
+
+        .footer__wrapper {
+            padding-top: 100px;
+        }
+
+        .footer-box__links__social-media__icon {
+            margin-left: 1px;
+            margin-right: 1px;
+            padding-top: 25px;
+            height: 55px;
+            width: 55px;
+        }
+
+        footer nav a {
+            font-size: 1.7em !important;
+        }
+        
+        .footer-box__nav-list--three {
+            padding-top: 55px;
+        }
+
+        .footer-box {
+            padding-bottom: 80px;
+        }
+    
+}        
+
+
+
+
+
+/* MEDIA QUERYS FOR LARGE SCREENS */
+
+
+
+@media print, screen and (min-width: 64em) {
+
+
+    /* MAIN STARTSEITE */
+
+
+    .content-box__stage__image {
+        margin-left: 16.66666%;
+        margin-top: 28vh;
+    }
+
+    .content-box__stage__text {
+        margin-top: 22%;
+    }
+
+    #content-box__stage__text--headline {
+        font-size: 3.5em;
+    }
+    
+    #content-box__stage__text--info-text {
+        font-size: 1.8em;
+        padding-right: 20%;
+    }
+
+    .content-box__wasser-links {
+        background-color: #BFCBD9;    
+        height: 550px;
+    }
+    
+    .content-box__wasser-links__text--headline {
+        font-size: 12em;
+        padding-bottom: 30px;
+    }
+    
+    .content-box__wasser-links__text--text {
+        font-size: 2.5em;
+        line-height: 1.4em;
+    }
+
+    .column {
+        flex: 2;
+    }
+
+    .content-box__wasser-links {
+        height: 580px;
+    }
+
+    .content-box__wasser-links__text--headline {
+        font-size: 7em;
+        padding-top: 130px;
+    }
+
+    .content-box__wasser-rechts {
+        padding-top: 3%;
+        align-self: center;
+    }
+
+    #content-box__wasser-rechts__text--headline {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    .content-box__wasser-rechts__text {
+        padding-bottom: 0px;
+    }
+
+    .content-box--variation__wasser {
+        padding-bottom: 60px;
+    }
+
+    .content-box__section__image img{
+        height: 380px;
+    }
+
+    .content-box__überblick__text--info-text {
+        margin-top: -100px;
+    }
+
+    .content-box__überblick__app-info__punkt--1,
+    .content-box__überblick__app-info__punkt--2, 
+    .content-box__überblick__app-info__punkt--3,    
+    .content-box__überblick__app-info__punkt--4, 
+    .content-box__überblick__app-info__punkt--5 {
+        font-size: 2.3em;
+        margin-top: 30px;
+    }
+
+    .content-box--variation__wasser-infos--b_w {
+        background-color: white;
+    }
+
+    .content-box--variation__wasser-infos--w_b {
+        background-color: #BFCBD9;
+    }
+
+
+
+    /* WEB-APP + PROFILSEITE */
+
+    .content-box__web-app__übersicht--circle {
+        padding: 15% 0;
+        border: 14px solid #0086BF;
+
+        margin-top: 70px;
+        margin-bottom: 10px;
+    }
+
+    .content-box__web-app__wassermenge--headline {
+        margin-top: 220px;
+    }
+
+    .content-box__web-app__wassermenge__eingabe-box--glas {
+        margin-top: 80px;
+    }
+
+    #content-box--variation__wasser-infos__text--löschen {
+        margin-top: -40px;
+    }
+
+    .content-box__web-app__übersicht--headline {
+        margin-top: 145px;
+        font-size: 3em;
+    }
+
+    .content-box__profil--headline {
+        margin-top: 250px;
+        margin-bottom: 0px;
+        font-size: 3em;
+    }
+
+    .content-box__profil__veränderung--headline {
+        margin-top: 80px;
+    }
+
+    .content-box__profil__wasserkonsum--headline {
+        font-size: 3em;
+    }
+
+
+
+}
