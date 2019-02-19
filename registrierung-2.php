@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/main.css">
-
+<!-- VALIDIERUNG WIE IN RESTIRERUNG:PHP , dann     header('Location: webapp.php'); -->
 </head>
 <body>
 
@@ -21,7 +21,7 @@
                 <span></span>
                 <span></span>
             </div>
-    
+
 
             <div id="menu-box-mobile" class="menu-box-mobile grid-padding-x">
 
@@ -61,11 +61,11 @@
                     <li class="menu-box__nav__login small-2 medium-1 medium-offset-4 large-1 large-offset-4 cell">
                             <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Login-Button" title="Login"></a>
                     </li>
-                    
+
                 </ul>
-  
+
             </div>
-    
+
         </nav>
 
     </header>
@@ -97,7 +97,7 @@
         <div class="footer-box grid-x">
 
             <div id="footer-box__links" class="cell small-7 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1">
-    
+
                 <div class="footer-box__links__logo small-2 small-offset-0 medium-2 medium-offset-2 large-2 large-offset-2">
                     <a href="index.php"><img src="images/logo/sodastream_footer.svg" class="footer-box__logo--img" alt="Logo Text: SodaStream" title="Logo"></a>
                 </div>
@@ -109,7 +109,7 @@
                     <a href="https://www.instagram.com"><img class="footer-box__links__social-media__icon" src="images/social-media/youtube.svg" alt="Youtube Icon" title="Youtube Icon"></a>
                 </div>
 
-            </div>   
+            </div>
 
             <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-2">
 
@@ -123,7 +123,7 @@
 
             </nav>
 
-            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0"> 
+            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0">
 
                 <h4 id="footer-box__headline" class="small-11 small-offset-0 medium-2 medium-offset-0">Informationen</h4>
 
@@ -135,8 +135,8 @@
 
             </nav>
 
-            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0"> 
-                
+            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0">
+
                 <ul class="footer-box__nav-list--three small-offset-5 medium-2 medium-offset-0">
                     <li class="footer-box__nav__element"><a href="#">Datenschutz</a></li>
                     <li class="footer-box__nav__element"><a href="#">Impressum</a></li>
@@ -151,9 +151,7 @@
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/main.js"></script>
-    
+
 
 </body>
 </html>
-
-

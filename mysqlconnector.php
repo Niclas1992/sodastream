@@ -6,14 +6,13 @@ class MysqlConnector {
   public $password;
   public $connection;
 
-
   /* Konstruktor verbindet zur Datenbank */
 
   public function __construct($servername, $username, $password){
       $this->servername = $servername;
       $this->username = $username;
       $this->password = $password;
-      $databasename = 'water_consum';
+      $databasename = 'sodastream';
       $this->connection = mysqli_connect($servername, $username, $password, $databasename);  // einzig wichtige Zeile in diesem Constructor
       echo 'Connect to <br>';
       echo 'Servername : ' . $servername;
@@ -27,7 +26,7 @@ class MysqlConnector {
   }
 
   //Methode gibt boolean zurück, ob der Benutzer im System ist
-  
+
   public function user_exists($email){
       $userexists = false;
       echo "Überprüfen ob Benutzer existiert : " . $email;
@@ -80,7 +79,7 @@ class MysqlConnector {
 
 public function insert_user($name, $email, $password, $username, $height, $weight){
   //SQL sollte so aussehen INSERT INTO User (Name, Username, Email, Password) VALUES ('Janos', 'nuttenivan', 'ivan@nutte.de','zuhälter');
-  $sqlinsert = "INSERT INTO User ( Name, Username, Email, Password ) " // bauen das SQL, das wir nutzen, um den
+  $sqlinsert = "INSERT INTO user ( name, username, email, password ) " // bauen das SQL, das wir nutzen, um den
   . " VALUES ('".$name."','".$username."','".$email."','" .$password. "');";//Benutzer in die Datenbank zu schreiben als String
   if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus$charactersfromdb
       echo "New record created successfully";
@@ -88,7 +87,7 @@ public function insert_user($name, $email, $password, $username, $height, $weigh
       echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
   }
 }
-  
+
 
 // ALLE Wasserwerte von einem Benutzer pro Tag
   /* Schreiben der Daten in die Datenbank */
@@ -135,11 +134,5 @@ public function insert_user($name, $email, $password, $username, $height, $weigh
     }
     return $water_for_user;
 }
-
-
-$connection = new MysqlConnector ('localhost', 'niclas', 'password', 'sodastream'); 
- 
-
-
 }
 ?>

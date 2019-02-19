@@ -1,6 +1,10 @@
 
 <?php
 
+
+require('mysqlconnector.php');
+
+$mysqlconnector = new MysqlConnector("localhost", "sodastream", "sodastream");
 $error = false;
 
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
@@ -17,8 +21,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 	{
 		$error=true;
         $name_error=' * Bitte geben Sie Ihren Namen ein';
-    }
-
+  }
 	if(empty($username))
 	{
 		$error=true;
@@ -27,6 +30,12 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
     if(empty($email))
     {
+      else{
+        if($mysqlconnector->user_exists($email)){
+          $email_error = "Benutzer existiert bereits.";
+          error = true;
+        }
+      }
         $email_error = " * Bitte geben Sie eine gültige E-Mail Adresse ein.";
         $error=true;
     }else{
@@ -47,8 +56,9 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 	{
 		//Validation Success!
 		//Do form processing like email, database etc here
-        mail("otti@petitcode.com", "Registrierung SAE", " NEUE REGISTRIERUNG " .$name , "From: Absender <register@sae.de>");
-        header('Location: registered.html');
+        $mysqlconnector->insert_user($name, $email, $password, $username, 0, 0);
+        //echo 'User inserted';
+        header('Location: registrierung-2.php');
 	}
 }
 ?>
@@ -78,7 +88,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
                 <span></span>
                 <span></span>
             </div>
-    
+
 
             <div id="menu-box-mobile" class="menu-box-mobile grid-padding-x">
 
@@ -118,11 +128,11 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
                     <li class="menu-box__nav__login small-2 medium-1 medium-offset-4 large-1 large-offset-4 cell">
                             <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Login-Button" title="Login"></a>
                     </li>
-                    
+
                 </ul>
-  
+
             </div>
-    
+
         </nav>
 
     </header>
@@ -136,16 +146,16 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
                 <h1 id="content-box__registrierung__headline">Gleich geschafft! Bitte fülle die Felder aus um durchzustarten:</h1>
 
                 <input class="row" type="text" id="name" name="name" placeholder="Name">
-                <span class="row error"><?php echo $name_error; ?></span><br/> 
+                <span class="row error"><?php echo $name_error; ?></span><br/>
 
                 <input class="row" type="text" id="username" name="username" placeholder="Benutzername">
-                <span class="row error"><?php echo $username_error; ?></span><br/> 
+                <span class="row error"><?php echo $username_error; ?></span><br/>
 
                 <input class="row" type="email" id="email" name="email" placeholder="E-Mail">
-                <span class="row error"><?php echo $email_error; ?></span><br/> 
+                <span class="row error"><?php echo $email_error; ?></span><br/>
 
                 <input class="row" type="text" id="password" name="password" placeholder="Passwort">
-                <span class="row error"><?php echo $password_error; ?></span><br/> 
+                <span class="row error"><?php echo $password_error; ?></span><br/>
 
                 <input type="submit" id="sign-up" name="submitted" value="Registrieren">
 
@@ -164,7 +174,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
         <div class="footer-box grid-x">
 
             <div id="footer-box__links" class="cell small-7 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1">
-    
+
                 <div class="footer-box__links__logo small-2 small-offset-0 medium-2 medium-offset-2 large-2 large-offset-2">
                     <a href="index.php"><img src="images/logo/sodastream_footer.svg" class="footer-box__logo--img" alt="Logo Text: SodaStream" title="Logo"></a>
                 </div>
@@ -176,7 +186,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
                     <a href="https://www.instagram.com"><img class="footer-box__links__social-media__icon" src="images/social-media/youtube.svg" alt="Youtube Icon" title="Youtube Icon"></a>
                 </div>
 
-            </div>   
+            </div>
 
             <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-2">
 
@@ -190,7 +200,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
             </nav>
 
-            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0"> 
+            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0">
 
                 <h4 id="footer-box__headline" class="small-11 small-offset-0 medium-2 medium-offset-0">Informationen</h4>
 
@@ -202,8 +212,8 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
             </nav>
 
-            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0"> 
-                
+            <nav class="footer-box__nav small-10 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-0">
+
                 <ul class="footer-box__nav-list--three small-offset-5 medium-2 medium-offset-0">
                     <li class="footer-box__nav__element"><a href="#">Datenschutz</a></li>
                     <li class="footer-box__nav__element"><a href="#">Impressum</a></li>
@@ -218,9 +228,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/main.js"></script>
-    
+
 
 </body>
 </html>
-
-
