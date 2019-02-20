@@ -12,6 +12,18 @@ class water_consume {
            $this->input_water = $input_water;
            $this->user_id = $user_id;
            $this->$type = $type;
-    } 
+    }
+
+    public calculate needed_water($height, $weight){
+      //TODO  alle Fälle abdecken
+      $daily_water = 0;
+      if ($height < 180 && $weight < 75){
+        $daily_water = 2;
+      }
+      return $daily_water;
+
+    }
+
+
 }
 ?>
