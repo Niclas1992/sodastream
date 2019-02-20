@@ -26,9 +26,9 @@ USE `sodastream`;
 CREATE TABLE `user` (
   `id` int(6) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `username` varchar(40) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `height` int(40) DEFAULT NULL,
   `weight` int(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,3 +1,70 @@
+
+<?php
+
+
+require('mysqlconnector.php');
+
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+$error = false;
+
+if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
+{
+    //get the values from the POST REQUEST
+    $email = $_POST['email']; $password = $_POST['password'];
+
+    // set the error messages empty
+    $email_error = ""; $password_error = "";
+
+    //if submitted, then validate
+
+    if(empty($email))
+    {
+        $email_error = " * Bitte geben Sie eine E-Mail Adresse ein.";
+        $error=true;
+
+    }else{
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $email_error = " * Bitte geben Sie eine gültige E-Mail Adresse ein.";
+            $error=true;
+        }
+
+        if($mysqlconnector->user_exists($email)){
+          $error = false;
+        
+        }else{
+                $email_error = " * Der Benutzer existiert nicht. Bitte registrieren.";
+                $error = true;
+        }
+
+    }
+
+    if(empty($password))
+	{
+		$error=true;
+        $password_error=' * Bitte geben Sie ein Passwort ein.';
+
+    }else{
+
+        if($mysqlconnector->checkpassword($email, $password)){
+            $error = false;
+          
+          }else{
+                  $password_error = " * Passwort falsch. Bitte erneut eingeben. ";
+                  $error = true;
+                  error_log ('Falsches Passwort eingegeben');
+          }
+    }
+
+    if(false === $error)
+	{
+        header('Location: web-app.php');
+        error_log ('Validation funktioniert');
+	}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,13 +141,15 @@
 
         <div class="content-box__login grid-x flex-center">
 
-            <form action="web-app.php" method="POST" class="small-10 medium-6 large-4 grid-x row">
+            <form action="login.php" method="POST" class="small-10 medium-6 large-4 grid-x row">
 
                 <h1 id="content-box__login__headline">Logge dich ein und verwalte deinen Wasserkonsum:</h1>
 
                 <input class="row" type="email" id="email" name="email" placeholder="E-Mail">
+                <span class="row error"><?php echo $email_error; ?></span><br/>
 
-                <input class="row" type="text" id="password" name="password" placeholder="Passwort">
+                <input class="row" type="password" id="password" name="password" placeholder="Passwort">
+                <span class="row error"><?php echo $password_error; ?></span><br/>
 
                 <input type="submit" id="sign-in" name="submitted" value="Einloggen">
 

@@ -1,3 +1,27 @@
+
+<?php
+
+require('mysqlconnector.php');
+
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+
+
+
+
+if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
+{
+    //get the values from the POST REQUEST
+    $input = $_POST['glas'];
+
+    //Schreiben des Wertes mittels einer Funktion in die Datenbank
+    $mysqlconnector->insert_water_consum($input, $glas, '6');
+    error_log ($input);
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,7 +185,7 @@
                     
                             <form action="web-app.php" method="POST" class="content-box__web-app__wassermenge__eingabe-box--glas__form grid-x medium-6 medium-offset-1 flex-center">
                 
-                                <input class="content-box__web-app__wassermenge__eingabe-box--glas__form--input small-10 medium-8 large-10" type="number" min="0,1" max="8" id="glas" name="glas" placeholder="Eingabe (Liter)">
+                                <input class="content-box__web-app__wassermenge__eingabe-box--glas__form--input small-10 medium-8 large-10" type="number" min="0.1" max="8" step="0.1" id="glas" name="glas" placeholder="Eingabe (Liter)">
                 
                                 <input class="content-box__web-app__wassermenge__eingabe-box--glas__form--submit small-10 medium-8 large-10" type="submit" id="input-glas" name="glas-submitted" value="Speichern">
                 
@@ -180,7 +204,7 @@
                     
                             <form action="web-app.php" method="POST" class="content-box__web-app__wassermenge__eingabe-box--bottle__form grid-x medium-6 medium-offset-1 flex-center">
                 
-                                <input class="content-box__web-app__wassermenge__eingabe-box--bottle__form--input small-10 medium-8 large-10" type="number" min="0,1" max="8" id="bottle" name="bottle" placeholder="Menge (Flaschen)">
+                                <input class="content-box__web-app__wassermenge__eingabe-box--bottle__form--input small-10 medium-8 large-10" type="number" min="0.1" max="8" step="0.1" id="bottle" name="bottle" placeholder="Menge (Flaschen)">
                 
                                 <input class="content-box__web-app__wassermenge__eingabe-box--bottle__form--submit small-10 medium-8 large-10" type="submit" id="input-bottle" name="bottle-submitted" value="Speichern">
                 

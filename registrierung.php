@@ -4,12 +4,11 @@
 
 require('mysqlconnector.php');
 
-$mysqlconnector = new MysqlConnector("localhost", "sodastream", "sodastream");
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 $error = false;
 
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 {
-
     //get the values from the POST REQUEST
     $name = trim($_POST['name']); $username = trim($_POST['username']); $email = $_POST['email']; $password = $_POST['password'];
 
@@ -21,7 +20,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 	{
 		$error=true;
         $name_error=' * Bitte geben Sie Ihren Namen ein';
-  }
+    }
 	if(empty($username))
 	{
 		$error=true;
@@ -30,19 +29,21 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
     if(empty($email))
     {
-      else{
-        if($mysqlconnector->user_exists($email)){
-          $email_error = "Benutzer existiert bereits.";
-          error = true;
-        }
-      }
         $email_error = " * Bitte geben Sie eine gültige E-Mail Adresse ein.";
         $error=true;
+
     }else{
+
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             //Unvalid email!
             $email_error = " * Bitte geben Sie eine gültige E-Mail Adresse ein.";
             $error=true;
+        }
+        
+        if($mysqlconnector->user_exists($email)){
+            $email_error = " * Der Benutzer existiert bereits. Bitte einloggen.";
+            $error = true;
+      
         }
     }
 
@@ -154,7 +155,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
                 <input class="row" type="email" id="email" name="email" placeholder="E-Mail">
                 <span class="row error"><?php echo $email_error; ?></span><br/>
 
-                <input class="row" type="text" id="password" name="password" placeholder="Passwort">
+                <input class="row" type="password" id="password" name="password" placeholder="Passwort">
                 <span class="row error"><?php echo $password_error; ?></span><br/>
 
                 <input type="submit" id="sign-up" name="submitted" value="Registrieren">

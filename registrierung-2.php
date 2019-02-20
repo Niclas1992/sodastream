@@ -1,3 +1,47 @@
+<?php
+
+
+require('mysqlconnector.php');
+
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+$error = false;
+
+if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
+{
+
+    //get the values from the POST REQUEST
+    $height = $_POST['height']; $weight = $_POST['weight'];
+
+    // set the error messages empty
+    $height_error = ""; $weight_error = "";
+
+    //if submitted, then validate
+    if(empty($height))
+	{
+		$error=true;
+        $height_error=' * Bitte geben Sie Ihre Größe ein';
+  }
+	if(empty($weight))
+	{
+		$error=true;
+        $weight_error=' * Bitte geben Sie Ihr Gewicht.';
+    }
+
+    if(false === $error)
+	{
+		//Validation Success!
+		//Do form processing like email, database etc here
+        $mysqlconnector->update_user($height, $weight);
+        //echo 'User inserted';
+        header('Location: web-app.php');
+	}
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +52,7 @@
 
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/main.css">
-<!-- VALIDIERUNG WIE IN RESTIRERUNG:PHP , dann     header('Location: webapp.php'); -->
+
 </head>
 <body>
 
@@ -39,7 +83,6 @@
                         <li class="menu-box-mobile__nav__element small-12">
                             <a class="menu-box-mobile__nav__element__link" href="warum-wasser.php">Warum Wasser?</a>
                         </li>
-
 
                 </ul>
 
@@ -74,13 +117,15 @@
 
         <div class="content-box__registrierung-2 grid-x flex-center">
 
-            <form action="web-app.php" method="POST" class="small-10 medium-6 large-4 grid-x row">
+            <form action="registrierung-2.php" method="POST" class="small-10 medium-6 large-4 grid-x row">
 
                 <h1 id="content-box__registrierung-2__headline">Um zu berechnen wie viel du täglich mindestens trinken solltest, benötigen wir noch deine Körpergröße und dein Gewicht:</h1>
 
                 <input class="row" type="number" min="1" max="220" id="height" name="height" placeholder="Körpergröße (cm)">
+                <span class="row error"><?php echo $height_error; ?></span><br/>
 
                 <input class="row" type="number" min="1" max="180" id="weight" name="weight" placeholder="Gewicht (kg)">
+                <span class="row error"><?php echo $weight_error; ?></span><br/>
 
                 <input type="submit" id="save" name="submitted" value="Speichern">
 
