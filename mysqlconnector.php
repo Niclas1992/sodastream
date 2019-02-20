@@ -29,7 +29,7 @@ class MysqlConnector {
 
 /* Schreiben der User-Daten in die Datenbank */
 
-public function insert_user($name, $email, $password, $username, $height, $weight, $daily_water){
+public function insert_user($name, $email, $password, $username, $height, $weight){
   // INSERT INTO user ( email, password, name, username  ) VALUES ('niclas@sae.de', 'passwort', 'niclas', 'niclas92');
   $encrytedpassword = password_hash($password, PASSWORD_DEFAULT);
   $sqlinsert = "INSERT INTO user ( email, password, name, username ) " // bauen das SQL, das wir nutzen, um den
