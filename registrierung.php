@@ -3,8 +3,8 @@
 
 
 require('mysqlconnector.php');
-
-$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+session_start();
+$mysqlconnector = new MysqlConnector("localhost", "test", "test");
 $error = false;
 
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
@@ -39,11 +39,11 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
             $email_error = " * Bitte geben Sie eine gültige E-Mail Adresse ein.";
             $error=true;
         }
-        
+
         if($mysqlconnector->user_exists($email)){
             $email_error = " * Der Benutzer existiert bereits. Bitte einloggen.";
             $error = true;
-      
+
         }
     }
 
@@ -59,6 +59,8 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 		//Do form processing like email, database etc here
         $mysqlconnector->insert_user($name, $email, $password, $username, 0, 0);
         //echo 'User inserted';
+        $_SESSION['justregister'] = $email;
+        error_log('Nun ist der User in der Session in justgregistered : ' . $_SESSION['justregister']);
         header('Location: registrierung-2.php');
 	}
 }
