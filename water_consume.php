@@ -6,7 +6,7 @@ class water_consume {
     public $input_water;
     public $user_id;
 
-    public function __construct($created_at, $input_water, $user_id, $type){
+    public function __construct($created_at, $input_water, $user_id){
            $this->created_at = $created_at;
            $this->input_water = $input_water;
            $this->user_id = $user_id;

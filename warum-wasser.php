@@ -1,3 +1,30 @@
+<?php
+
+
+require('mysqlconnector.php');
+session_start();
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+
+// Löschen aller Session-Variablen.
+$_SESSION = array();
+
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $params["path"],
+        $params["domain"], $params["secure"], $params["httponly"]
+    );
+}
+
+// Zum Schluß, löschen der Session.
+session_destroy();
+  error_log('Nutzer wurde aus der der Session gelöscht.');
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

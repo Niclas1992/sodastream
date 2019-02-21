@@ -62,6 +62,8 @@ public function insert_user($name, $email, $password, $username){
     return $userexists;
 }
 
+
+
 /* Überprüfung, ob das Passwort zur eingegebenen E-Mail passt */
 
 public function checkpassword($email, $password){
@@ -79,9 +81,9 @@ public function checkpassword($email, $password){
  public function update_user($email, $height, $weight){
   //UPDATE sodastream.user SET height = 179, weight = 74 where Name = 'niclas';
   error_log ("Geht in die Funktion update_user");
-  $sqlupdate = "UPDATE sodastream.user SET height = ".$height.", weight = ".$weight." WHERE email = '".$email."';"; //Benutzer in die Datenbank zu schreiben als String
+  $sqlupdate = "UPDATE sodastream.user SET height = ".$height.", weight = ".$weight." WHERE email = '".$email."';";
   error_log($sqlupdate);
-  if ($this->connection->query($sqlupdate) === TRUE) { //query führt das SQL auf der Datenbank aus
+  if ($this->connection->query($sqlupdate) === TRUE) { 
       echo "New record created successfully";
       error_log("Größe/gewicht in datenbank geschrieben");
   } else {
@@ -90,44 +92,73 @@ public function checkpassword($email, $password){
   }
 }
 
+ /* Updaten der Userdaten für Größe in die Datenbank */ 
 
-    /*
-– Ich möchte die benötigte tägliche Wassermenge über die Bedingungen von Größe und Gewicht festlegen.
-– Der Wert soll in die Tabelle gespeichert werden, dafür habe ich eine neue Zeile daily_water in der Tabelle user angelegt und in der Klasse ergänzt.
-– Siehe unten: Ist der user kleiner als 180cm und wiegt weniger als 75kg soll im sql die Zeile daily_water aktualisiert und der entsprechende Wert eingetrgen werden.
-*/
-
-
-/* Ausgabe der benötigten täglichen Wassermenge
-
-public function required_water ($id, $height, $weight){
-  $sql = "SELECT * FROM user WHERE height = '$height' AND weight = '$weight';"; //Daten aus der Datenbank holen
-
-  if ($this->$height < 180 && $this->$weight < 75){
-    $sqlupdate = "UPDATE sodastream.user SET daily_water = 2 WHERE id = ". $id;
+ public function update_user_height($email, $height){
+  //UPDATE sodastream.user SET height = 179 where Name = 'niclas';
+  error_log ("Geht in die Funktion update_user_height");
+  $sqlupdate = "UPDATE sodastream.user SET height = ".$height." WHERE email = '".$email."';"; 
+  error_log($sqlupdate);
+  if ($this->connection->query($sqlupdate) === TRUE) { 
+      echo "New record created successfully";
+      error_log("Größe in Datenbank geschrieben");
+  } else {
+      echo "Error: " . $sqlupdate . "<br>" . $this->connection->error;
+      error_log("Größe nicht in Datenbank geschrieben");
   }
-
 }
-*/
+
+
+ /* Updaten der Userdaten für Gewicht in die Datenbank */ 
+
+ public function update_user_weight($email, $weight){
+  //UPDATE sodastream.user SET weight = 80 where Name = 'niclas';
+  error_log ("Geht in die Funktion update_user_weight");
+  $sqlupdate = "UPDATE sodastream.user SET weight = ".$weight." WHERE email = '".$email."';"; 
+  error_log($sqlupdate);
+  if ($this->connection->query($sqlupdate) === TRUE) { 
+      echo "New record created successfully";
+      error_log("Gewicht in Datenbank geschrieben");
+  } else {
+      echo "Error: " . $sqlupdate . "<br>" . $this->connection->error;
+      error_log("Gewicht nicht in Datenbank geschrieben");
+  }
+}
 
 
 
-// ALLE Wasserwerte von einem Benutzer pro Tag
-  /* Schreiben der Daten in die Datenbank */
 
-  public function insert_water_consum($input, $type, $user_id){
-    //INSERT INTO sodastream (id, created_at, input_water, type, user_id) VALUES ('1', '2018-12-03', '5', 'Glass', '1');
+//ermittelt weight and heigth aus Tabelle user zu uebergebenen email-adresse
+public function get_weight_and_height($email){
+  $userparam = array();
+  $sqlselect = "SELECT weight, height FROM sodastream.user WHERE email = '" .$email . "';";
+  $userparamfromdb = $this->connection->query($sqlselect);
+  foreach($userparamfromdb AS $uparam) {
+    array_push($userparam, $userparamfromdb[0]['weight']);
+    array_push($userparam, $userparamfromdb[0]['height']);
+ }
+  return $userparam;
+}
+
+
+
+
+/* Einfügen der Wasserwerte in die Datenbank */
+
+public function insert_water_consum($input, $email){
+  //INSERT INTO sodastream (created_at, input_water, user_id) VALUES  ('2018-12-03', '2.4', '24');
     $created_at = date("Y-m-d H:i:s");
-    $sqlinsert = "INSERT INTO sodastream.water_consume (created_at, input_water, type, user_id) " // bauen das SQL, das wir nutzen, um den
-    . " VALUES ('".$created_at."','".$input."','".$type."','" .$user_id. "');";//Benutzer in die Datenbank zu schreiben als String
-    if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus$charactersfromdb
+    $sqlinsert = "INSERT INTO sodastream.water_consume (created_at, input_water, user_id) "
+    ." SELECT '". $created_at."','".$input. "', id from user where email = '" . $email . "';";  
+    if ($this->connection->query($sqlinsert) === TRUE) { 
         echo "New record created successfully";
+        echo $sqlinsert;
     } else {
         echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
     }
 }
 
-  /* Gibt die Wasserwerte des jeweiligen Nutzers aus  */
+  /* Gibt die täglichen Wasserwerte des jeweiligen Nutzers aus */
 
   public function get_water_for_user_and_day($user, $created_at){
     $water_for_user = array();
@@ -138,7 +169,7 @@ public function required_water ($id, $height, $weight){
     foreach($watersfromdb AS $waterfromdb) {
       //$created_at, $input_water, $user_id, $type
       //mapping der Datenbank Daten als Php Objekte
-      $water = new water_consume($waterfromdb[i]['created_at'], $waterfromdb[i]['input_water'], $waterfromdb[i]['user_id'], $waterfromdb[i]['type'] );
+      $water = new water_consume($waterfromdb[i]['created_at'], $waterfromdb[i]['input_water'], $waterfromdb[i]['user_id'] );
       array_push($water_for_user, $water);
     }
     return $water_for_user;

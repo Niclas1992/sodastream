@@ -13,6 +13,70 @@ else {
   header('Location: login.php');
 }
 
+$error = false;
+$height_error = "";
+$weight_error = "";
+if(!empty($_POST['update-height'])) // Überprüfung, ob Button geklickt wurde
+{
+
+    //get the values from the POST REQUEST
+    $height = $_POST['height'];
+
+    //if submitted, then validate
+    if(empty($height))
+	{
+		$error=true;
+        $height_error=' * Bitte geben Sie Ihre Größe ein';
+    }
+
+    if(false === $error)
+	{
+		//Validation Success!
+		//Do form processing like email, database etc here
+        error_log("Größe wird geändert");
+
+        if(!empty($_SESSION['loggedin'])){
+          $mysqlconnector->update_user_height($_SESSION['loggedin'], $height);
+          error_log("User in Session loggedin : " . $_SESSION['loggedin']);
+        }else{
+          echo 'Session abgelaufen oder nicht da!';
+          error_log("User nicht in Session !");
+        }
+        error_log ('Größe wurde geändert');
+	}
+}
+
+if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
+{
+
+    //get the values from the POST REQUEST
+    $weight = $_POST['weight'];
+
+    //if submitted, then validate
+    if(empty($weight))
+	{
+		$error=true;
+        $weight_error=' * Bitte geben Sie Ihr Gewicht ein';
+    }
+
+    if(false === $error)
+	{
+		//Validation Success!
+		//Do form processing like email, database etc here
+        error_log("Gewicht wird geändert");
+
+        if(!empty($_SESSION['loggedin'])){
+          $mysqlconnector->update_user_weight($_SESSION['loggedin'], $weight);
+          error_log("User in Session loggedin : " . $_SESSION['loggedin']);
+        }else{
+          echo 'Session abgelaufen oder nicht da!';
+          error_log("User nicht in Session !");
+        }
+        error_log ('Gewicht wurde geändert');
+	}
+}
+
+
 ?>
 
 
@@ -135,13 +199,19 @@ else {
                 <div class="content-box__profil__veränderung--aktuell small-4 small-offset-4 medium-offset-7">
                     
                         <!-- HIER DIE AKTUELLE KÖRPERGRÖSSE AUSGEBEN -->
-                        180 cm
 
+                     
+                                               
+
+
+
+                            180 cm
+                       
                 </div>
 
                 <h3 class="content-box__profil__veränderung--headline small-offset-3">Körpergröße neu:</h3>
 
-                <form action="web-app.php" method="POST" class="content-box__profil__veränderung__form grid-x flex-center small-12 small-offset-0 medium-6">
+                <form action="profil.php" method="POST" class="content-box__profil__veränderung__form grid-x flex-center small-12 small-offset-0 medium-6">
     
 
                     <input class="small-8 small-offset-1 medium-6 medium-offset-1" type="number" min="1" max="220" id="height" name="height" placeholder="Körpergröße (cm)">
@@ -170,7 +240,7 @@ else {
 
                 <h3 class="content-box__profil__veränderung--headline small-offset-3">Gewicht neu:</h3>
 
-                <form action="web-app.php" method="POST" class="content-box__profil__veränderung__form grid-x flex-center small-12 small-offset-0 medium-6">
+                <form action="profil.php" method="POST" class="content-box__profil__veränderung__form grid-x flex-center small-12 small-offset-0 medium-6">
     
 
                     <input class="small-8 small-offset-1 medium-6 medium-offset-3" type="number" min="1" max="180" id="weight" name="weight" placeholder="Gewicht (kg)">

@@ -2,16 +2,19 @@
 <?php
 
 require('mysqlconnector.php');
+require('water_calculator.php');
+
 session_start();
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 
 
-//TODO das nur auf geschützten Seiten tun
 if(!empty($_SESSION['loggedin'])){
   error_log ('Eingeloggt');
 }else {
   header('Location: login.php');
 }
+
+
 
 if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
 {
@@ -19,10 +22,38 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
     $input = $_POST['glas'];
 
     //Schreiben des Wertes mittels einer Funktion in die Datenbank
-    $mysqlconnector->insert_water_consum($input, $glas, '6');
+    //FUNKTIONIERT NOCH NICHT:
+    $mysqlconnector->insert_water_consum($input, $_SESSION['loggedin']);
     error_log ($input);
 }
 
+if(!empty($_POST['bottle-submitted'])) // Überprüfung, ob Button geklickt wurde
+{
+    //get the values from the POST REQUEST
+    $input = $_POST['bottle'] * 0.6;
+
+    //Schreiben des Wertes mittels einer Funktion in die Datenbank
+    //FUNKTIONIERT NOCH NICHT:
+    $mysqlconnector->insert_water_consum($input, $_SESSION['loggedin']);
+    error_log ($input);
+}
+/*
+if ($result->num_rows > 0) {
+
+    if($row = $result->fetch_assoc()) {
+        echo '<h1>'.$row["username"]."'s Profile</h1>";
+        echo '<table>';
+        echo '<tr><td>ID:</td><td>'.$row["id"].'</td></tr>';
+        echo '<tr><td>Username:</td><td>'.$row["username"].'</td></tr>';
+        echo '<tr><td>Email:</td><td>'.$row["email"].'</td></tr>';
+        echo '<tr><td>Password:</td><td>'.$row["password"].'</td></tr>';
+    }
+    echo '</table>';
+}
+else {
+   echo "0 results";
+}
+*/
 
 
 ?>
@@ -58,7 +89,7 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
 
                         <li class="menu-box-mobile__nav__login small-12">
                             <a class="menu-box-mobile__nav__element__link" href="login.php">
-                                <img src="images/login-mobile.svg" class="menu-box-mobile__nav__login--img" alt="Login-Button" title="Login">Login</a>
+                                <img src="images/login-mobile.svg" class="menu-box-mobile__nav__login--img" alt="Logout-Button" title="Logout">Logout</a>
                         </li>
 
                         <li class="menu-box-mobile__nav__element small-12">
@@ -73,9 +104,7 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
                             <a class="menu-box-mobile__nav__element__link" href="#">Support</a>
                         </li>
 
-                        <li class="menu-box-mobile__nav__element small-12">
-                            <a class="menu-box-mobile__nav__element__link" href="warum-wasser.php">Warum Wasser?</a>
-                        </li>
+                    
 
 
                 </ul>
@@ -92,11 +121,11 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
                     </li>
 
                     <li class="menu-box__nav__logo small-4 small-offset-1 medium-2 medium-offset-2 large-2 large-offset-3 flex-center cell">
-                        <a href="index.php"><img src="images/logo/sodastream.svg" class="menu-box__nav__logo--img" alt="Logo Text: SodaStream" title="Logo"></a>
+                        <a href="#"><img src="images/logo/sodastream.svg" class="menu-box__nav__logo--img" alt="Logo Text: SodaStream" title="Logo"></a>
                     </li>
 
                     <li class="menu-box__nav__login small-2 medium-1 medium-offset-4 large-1 large-offset-4 cell">
-                            <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Login-Button" title="Login"></a>
+                            <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Logout-Button" title="Logout"></a>
                     </li>
 
                 </ul>
@@ -138,7 +167,17 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
                         <div class="content-box__web-app__übersicht--circle-prozent">
 
                             <!-- HIER DIE RECHNUNG EINFÜGEN IN PROZENT UND ÜBER DIV STYLEN-->
-                            65 %
+
+                            <?php
+                              /*
+                                $water_aim = $liter;
+                                $water_current = 35;                         
+
+                                echo round(($pro/$gesamt*100), 1)."%<br>";
+*/
+                            ?>
+
+                        
 
                         </div>
 
@@ -153,7 +192,11 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
                         <p class="content-box__web-app__übersicht--bisher-text">Bisher:</p>
 
                         <div class="content-box__web-app__übersicht--bisher-output">
+
+
                             1,5l <!-- HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
+
+
                         </div>
 
                     </div>
@@ -163,7 +206,18 @@ if(!empty($_POST['glas-submitted'])) // Überprüfung, ob Button geklickt wurde
                         <p class="content-box__web-app__übersicht--ziel-text">Ziel:</p>
 
                         <div class="content-box__web-app__übersicht--ziel-output">
-                            2,5l <!-- HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
+                          <!--   2,5l HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
+
+                            <?php
+                              
+                                    $userparam = $mysqlconnector->get_weight_and_height($_SESSION['email']);
+                                    error_log($userparam);
+                                    error_log("weight:".$userparam[0].", height:".$userparam[1]);
+                                    $liter = water_calculator::calculate_daily_water($userparam[0], $userparam[1]);
+                                    error_log($liter);
+                                    echo $liter . "l";
+                            ?>
+
                         </div>
 
                     </div>

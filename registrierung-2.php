@@ -2,7 +2,9 @@
 
 
 require('mysqlconnector.php');
+
 session_start();
+
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 $error = false;
 $height_error = "";
@@ -45,6 +47,7 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
         header('Location: web-app.php');
 	}
 }
+
 ?>
 
 
