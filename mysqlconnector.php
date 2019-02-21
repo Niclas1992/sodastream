@@ -29,7 +29,7 @@ class MysqlConnector {
 
 /* Schreiben der User-Daten in die Datenbank */
 
-public function insert_user($name, $email, $password, $username, $height, $weight){
+public function insert_user($name, $email, $password, $username){
   // INSERT INTO user ( email, password, name, username  ) VALUES ('niclas@sae.de', 'passwort', 'niclas', 'niclas92');
   $encrytedpassword = password_hash($password, PASSWORD_DEFAULT);
   $sqlinsert = "INSERT INTO user ( email, password, name, username ) " // bauen das SQL, das wir nutzen, um den
@@ -61,6 +61,7 @@ public function insert_user($name, $email, $password, $username, $height, $weigh
     }
     return $userexists;
 }
+
 /* Überprüfung, ob das Passwort zur eingegebenen E-Mail passt */
 
 public function checkpassword($email, $password){
@@ -77,9 +78,15 @@ public function checkpassword($email, $password){
 
  public function update_user($email, $height, $weight){
   //UPDATE sodastream.user SET height = 179, weight = 74 where Name = 'niclas';
-  $sqlupdate = "UPDATE sodastream.user SET height = " . $height // bauen das SQL, das wir nutzen, um den
-  . ", weight = ".$weight." WHERE email =". $email;//Benutzer in die Datenbank zu schreiben als String
-  if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus
+  error_log ("Geht in die Funktion update_user");
+  $sqlupdate = "UPDATE sodastream.user SET height = ".$height.", weight = ".$weight." WHERE email = ".$email.";"; //Benutzer in die Datenbank zu schreiben als String
+  if ($this->connection->query($sqlupdate) === TRUE) { //query führt das SQL auf der Datenbank aus
+      echo "New record created successfully";
+      error_log("Größe/gewicht in datenbank geschrieben");
+  } else {
+      echo "Error: " . $sqlupdate . "<br>" . $this->connection->error;
+  }
+}
 
 
     /*
@@ -87,18 +94,6 @@ public function checkpassword($email, $password){
 – Der Wert soll in die Tabelle gespeichert werden, dafür habe ich eine neue Zeile daily_water in der Tabelle user angelegt und in der Klasse ergänzt.
 – Siehe unten: Ist der user kleiner als 180cm und wiegt weniger als 75kg soll im sql die Zeile daily_water aktualisiert und der entsprechende Wert eingetrgen werden.
 */
-
-    if ($this->$height < 180 && $this->$weight < 75){
-      $sqlupdate = "UPDATE sodastream.user SET daily_water = 2 WHERE id = ". $id;
-    }
-
-      echo "New record created successfully";
-  } else {
-      echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
-  }
-}
-
-
 
 
 /* Ausgabe der benötigten täglichen Wassermenge

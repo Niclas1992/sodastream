@@ -3,8 +3,8 @@
 
 
 require('mysqlconnector.php');
-
-$mysqlconnector = new MysqlConnector("localhost", "test", "test");
+session_start();
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 $error = false;
 
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
@@ -58,6 +58,8 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
     if(false === $error)
 	{
+        $_SESSION['loggedin'] = $email;
+        error_log("User in Session : " . $_SESSION['loggedin']);
         header('Location: web-app.php');
         error_log ('Validation funktioniert');
 	}

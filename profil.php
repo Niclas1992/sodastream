@@ -1,3 +1,15 @@
+
+<?php
+
+
+require('mysqlconnector.php');
+session_start();
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

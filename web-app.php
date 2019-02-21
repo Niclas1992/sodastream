@@ -3,7 +3,7 @@
 
 require('mysqlconnector.php');
 session_start();
-$mysqlconnector = new MysqlConnector("localhost", "test", "test");
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 
 
 //TODO das nur auf geschützten Seiten tun

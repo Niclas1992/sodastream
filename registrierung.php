@@ -4,7 +4,7 @@
 
 require('mysqlconnector.php');
 session_start();
-$mysqlconnector = new MysqlConnector("localhost", "test", "test");
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 $error = false;
 
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde

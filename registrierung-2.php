@@ -3,7 +3,7 @@
 
 require('mysqlconnector.php');
 session_start();
-$mysqlconnector = new MysqlConnector("localhost", "test", "test");
+$mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 $error = false;
 $height_error = "";
 $weight_error = "";
@@ -12,9 +12,6 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
     //get the values from the POST REQUEST
     $height = $_POST['height']; $weight = $_POST['weight'];
-
-    // set the error messages empty
-
 
     //if submitted, then validate
     if(empty($height))
@@ -37,8 +34,8 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
         if(!empty($_SESSION['justregister'])){
           $mysqlconnector->update_user($_SESSION['justregister'], $height, $weight);
           $_SESSION['loggedin'] = $_SESSION['justregister'];
-          error_log("User in Session nun : " . $_SESSION['loggedin']);
-          $_SESSION['justregister'] ='';
+          error_log("User in Session loggedin : " . $_SESSION['loggedin']);
+          //$_SESSION['justregister'] ='';
         }else{
           echo 'Session abgealufen oder nicht da!';
           header('Location: login.php');
