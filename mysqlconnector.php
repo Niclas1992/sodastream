@@ -79,12 +79,14 @@ public function checkpassword($email, $password){
  public function update_user($email, $height, $weight){
   //UPDATE sodastream.user SET height = 179, weight = 74 where Name = 'niclas';
   error_log ("Geht in die Funktion update_user");
-  $sqlupdate = "UPDATE sodastream.user SET height = ".$height.", weight = ".$weight." WHERE email = ".$email.";"; //Benutzer in die Datenbank zu schreiben als String
+  $sqlupdate = "UPDATE sodastream.user SET height = ".$height.", weight = ".$weight." WHERE email = '".$email."';"; //Benutzer in die Datenbank zu schreiben als String
+  error_log($sqlupdate);
   if ($this->connection->query($sqlupdate) === TRUE) { //query führt das SQL auf der Datenbank aus
       echo "New record created successfully";
       error_log("Größe/gewicht in datenbank geschrieben");
   } else {
       echo "Error: " . $sqlupdate . "<br>" . $this->connection->error;
+      error_log("Größe/gewicht nicht in datenbank geschrieben");
   }
 }
 

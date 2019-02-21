@@ -7,6 +7,12 @@ session_start();
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 
 
+if(!empty($_SESSION['loggedin']))
+  error_log ('Eingeloggt');
+else {
+  header('Location: login.php');
+}
+
 ?>
 
 

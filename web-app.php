@@ -7,9 +7,9 @@ $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 
 
 //TODO das nur auf geschützten Seiten tun
-if(!empty($_SESSION['loggedin']))
-  echo 'alles korrekt';
-else {
+if(!empty($_SESSION['loggedin'])){
+  error_log ('Eingeloggt');
+}else {
   header('Location: login.php');
 }
 
