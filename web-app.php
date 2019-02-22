@@ -210,9 +210,9 @@ else {
 
                             <?php
                               
-                                    $userparam = $mysqlconnector->get_weight_and_height($_SESSION['email']);
+                                    $userparam = $mysqlconnector->get_height_and_weight($_SESSION['loggedin']);
                                     error_log($userparam);
-                                    error_log("weight:".$userparam[0].", height:".$userparam[1]);
+                                    error_log("height:".$userparam[0].", weight:".$userparam[1]);
                                     $liter = water_calculator::calculate_daily_water($userparam[0], $userparam[1]);
                                     error_log($liter);
                                     echo $liter . "l";

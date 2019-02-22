@@ -3,7 +3,7 @@
 
 class water_calculator {
 
-    public static function calculate_daily_water($height, $weight, $email) {
+    public static function calculate_daily_water($height, $weight) {
 
     $daily_water = 0;
     if ($height < 130 && $weight < 40){
