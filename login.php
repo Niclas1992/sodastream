@@ -1,9 +1,7 @@
 
 <?php
 
-
 require('mysqlconnector.php');
-session_start();
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 
 // Löschen aller Session-Variablen.
@@ -21,6 +19,9 @@ session_destroy();
   error_log('Nutzer wurde aus der der Session gelöscht.');
 
 session_start();
+
+
+//Validierung der Felder:
 
 $error = false;
 
@@ -113,24 +114,22 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 
                 <ul class="grid-x">
 
-                        <li class="menu-box-mobile__nav__login small-12">
-                            <a class="menu-box-mobile__nav__element__link" href="login.php">
-                                <img src="images/login-mobile.svg" class="menu-box-mobile__nav__login--img" alt="Login-Button" title="Login">Login</a>
-                        </li>
+                    <li class="menu-box-mobile__nav__login small-12">
+                        <a class="menu-box-mobile__nav__element__link" href="login.php">
+                            <img src="images/login-mobile.svg" class="menu-box-mobile__nav__login--img" alt="Login-Button" title="Login">Login</a>
+                    </li>
 
-                        <li class="menu-box-mobile__nav__element small-12">
-                            <a class="menu-box-mobile__nav__element__link" href="#">Support</a>
-                        </li>
+                    <li class="menu-box-mobile__nav__element small-12">
+                        <a class="menu-box-mobile__nav__element__link" href="#">Support</a>
+                    </li>
 
-                        <li class="menu-box-mobile__nav__element small-12">
-                            <a class="menu-box-mobile__nav__element__link" href="warum-wasser.php">Warum Wasser?</a>
-                        </li>
-
+                    <li class="menu-box-mobile__nav__element small-12">
+                        <a class="menu-box-mobile__nav__element__link" href="warum-wasser.php">Warum Wasser?</a>
+                    </li>
 
                 </ul>
 
             </div>
-
 
             <div id="menu-box" class="menu-box grid-container">
 

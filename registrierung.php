@@ -5,6 +5,10 @@
 require('mysqlconnector.php');
 session_start();
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+
+
+//Validierung der einzelnen Felder:
+
 $error = false;
 
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde

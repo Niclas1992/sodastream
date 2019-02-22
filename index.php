@@ -105,7 +105,7 @@ session_destroy();
             <section class="grid-x content-box__stage">
 
                 <div class="content-box__stage__image small-6 medium-3 medium-offset-2 large-2 large-offset-2">
-                    <img src="images/teaser-mockup.png" alt="iPhone mit Wasserübersicht" title="iPhone mit Wasserübersicht">
+                    <img src="images/teaser1-mockup.png" alt="iPhone mit Wasserübersicht" title="iPhone mit Wasserübersicht">
                 </div>
 
                 <div class="content-box__stage__text small-6 small-offset-1 medium-5 medium-offset-1 large-4 large-offset-2">
@@ -183,7 +183,7 @@ session_destroy();
 
                 <div class="content-box__überblick__app-info__image1 small-6 small-offset-2 medium-3 medium-offset-2 large-3 large-offset-3">
 
-                    <img src="images/teaser-mockup.png" alt="iPhone mit Wasserübersicht" title="iPhone mit Wasserübersicht">
+                    <img src="images/teaser2-mockup.png" alt="iPhone mit Wasserübersicht" title="iPhone mit Wasserübersicht">
 
                 </div>
 
@@ -237,7 +237,7 @@ session_destroy();
 
                 <div class="content-box__überblick__app-info__image2 small-6 small-offset-3 medium-3 medium-offset-2 large-3 large-offset-1">
 
-                    <img src="images/teaser-mockup.png" alt="iPhone mit Wasserübersicht" title="iPhone mit Wasserübersicht">
+                    <img src="images/teaser3-mockup.png" alt="iPhone mit Wasserübersicht" title="iPhone mit Wasserübersicht">
                         
                 </div>
 

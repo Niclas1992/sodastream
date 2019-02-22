@@ -1,14 +1,17 @@
 <?php
 
-
 require('mysqlconnector.php');
-
 session_start();
-
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
+
+
+//Validierung der einzelnen Felder:
+
+
 $error = false;
 $height_error = "";
 $weight_error = "";
+
 if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 {
 
@@ -49,9 +52,6 @@ if(!empty($_POST['submitted'])) // Überprüfung, ob Button geklickt wurde
 }
 
 ?>
-
-
-
 
 
 <!DOCTYPE html>

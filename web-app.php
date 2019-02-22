@@ -37,24 +37,6 @@ if(!empty($_POST['bottle-submitted'])) // Überprüfung, ob Button geklickt wurd
     $mysqlconnector->insert_water_consum($input, $_SESSION['loggedin']);
     error_log ($input);
 }
-/*
-if ($result->num_rows > 0) {
-
-    if($row = $result->fetch_assoc()) {
-        echo '<h1>'.$row["username"]."'s Profile</h1>";
-        echo '<table>';
-        echo '<tr><td>ID:</td><td>'.$row["id"].'</td></tr>';
-        echo '<tr><td>Username:</td><td>'.$row["username"].'</td></tr>';
-        echo '<tr><td>Email:</td><td>'.$row["email"].'</td></tr>';
-        echo '<tr><td>Password:</td><td>'.$row["password"].'</td></tr>';
-    }
-    echo '</table>';
-}
-else {
-   echo "0 results";
-}
-*/
-
 
 ?>
 
@@ -64,7 +46,7 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Startseite</title>
+    <title>Wasser Übersicht</title>
 
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/main.css">
@@ -125,7 +107,7 @@ else {
                     </li>
 
                     <li class="menu-box__nav__login small-2 medium-1 medium-offset-4 large-1 large-offset-4 cell">
-                            <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Logout-Button" title="Logout"></a>
+                            <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Logout-Button" title="Logout"> Logout</a>
                     </li>
 
                 </ul>
@@ -169,15 +151,13 @@ else {
                             <!-- HIER DIE RECHNUNG EINFÜGEN IN PROZENT UND ÜBER DIV STYLEN-->
 
                             <?php
-                              /*
-                                $water_aim = $liter;
-                                $water_current = 35;                         
 
-                                echo round(($pro/$gesamt*100), 1)."%<br>";
-*/
+                                //Hier fehlt noch der Wert des bisherigen Wasserkonsums, siehe weiter unten.
+
+                                $prozent = 0;
+                                $prozent = round((2.5 / $_SESSION['liter']) * 100)."%<br>";
+                                echo $prozent;
                             ?>
-
-                        
 
                         </div>
 
@@ -194,8 +174,31 @@ else {
                         <div class="content-box__web-app__übersicht--bisher-output">
 
 
-                            1,5l <!-- HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
+                            2,5l <!-- HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
 
+                            <?php
+                                         
+                                $user_id = $mysqlconnector->get_user_id($_SESSION['loggedin']);
+                                error_log( print_r($user_id, TRUE) );
+
+                                $water_yet = $mysqlconnector->get_water_for_user_and_day($user_id['user_id']);
+                                error_log( print_r($water_yet, TRUE) );
+
+
+                                //Berechnung der bisherigen Tinkmenge, input_water wird aus array geholt
+                                //$only_water = $water_yet['input_water'];
+                               
+                                /* 
+                                Bis hierhin bin ich gekommen. 
+                                Nächste Schritte wären:
+
+                                – die Ausgabe der Summe
+                                – die Speicherung dieser in der Session
+                                – den Abruf aus der Session 
+                                – die Eingabe des Parameters für die prozentuale Bestimmung
+
+                                */
+                            ?>
 
                         </div>
 
@@ -209,19 +212,19 @@ else {
                           <!--   2,5l HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
 
                             <?php
-                                    $daily_water = $mysqlconnector->get_height_and_weight($_SESSION['loggedin']);
-                                    //hier sagt er, dass error_log ein string und kein array erwartet:
-                                    error_log('schnelles String'); 
                                     
+                                    $daily_water = $mysqlconnector->get_height_and_weight($_SESSION['loggedin']);
+                                     //error_log( print_r($daily_water, TRUE) );
 
-                                    //keine Ausgabe hier
-                                    error_log("height:".$size['height'].", weight:".$size['weight']);
-
-                                    $liter = water_calculator::calculate_daily_water($size['height'], $size['weight']);//
+                                    $liter = water_calculator::calculate_daily_water($daily_water['height'], $daily_water['weight']);//
                                     
                                     //calculator bekommt werte nicht und gibt deshalb 1. wert aus
                                     error_log($liter);
                                     echo $liter . "l";
+
+                                    //Variable in die Session speichern
+                                    $_SESSION['liter'] = $liter;
+                                   
                             ?>
 
                         </div>
@@ -246,9 +249,10 @@ else {
 
                                 <img src="images/glas.png" alt="Glas Icon" title="Glas Icon">
 
+
                             </div>
 
-                            <form action="web-app.php" method="POST" class="content-box__web-app__wassermenge__eingabe-box--glas__form grid-x medium-6 medium-offset-1 flex-center">
+                            <form action="web-app.php" method="POST" class="content-box__web-app__wassermenge__eingabe-box--glas__form grid-x small-12 medium-6 medium-offset-1 flex-center">
 
                                 <input class="content-box__web-app__wassermenge__eingabe-box--glas__form--input small-10 medium-8 large-10" type="number" min="0.1" max="8" step="0.1" id="glas" name="glas" placeholder="Eingabe (Liter)">
 
@@ -267,7 +271,7 @@ else {
 
                             </div>
 
-                            <form action="web-app.php" method="POST" class="content-box__web-app__wassermenge__eingabe-box--bottle__form grid-x medium-6 medium-offset-1 flex-center">
+                            <form action="web-app.php" method="POST" class="content-box__web-app__wassermenge__eingabe-box--bottle__form grid-x small-12 medium-6 medium-offset-1 flex-center">
 
                                 <input class="content-box__web-app__wassermenge__eingabe-box--bottle__form--input small-10 medium-8 large-10" type="number" min="0.1" max="8" step="0.1" id="bottle" name="bottle" placeholder="Menge (Flaschen)">
 
@@ -277,7 +281,7 @@ else {
 
                         </div>
 
-                    <p id="content-box--variation__wasser-infos__text--löschen" class="small-6 medium-6 large-4 large-offset-6">Falsche Eingabe gemacht?<br>Einfach mit einem Klick die letzte Eingabe&nbsp;<a class="" id="content-box__login__text--link" href="registrierung.php">löschen!</a></p>
+                  <!--   <p id="content-box--variation__wasser-infos__text--löschen" class="small-6 medium-6 large-4 large-offset-6">Falsche Eingabe gemacht?<br>Einfach mit einem Klick die letzte Eingabe&nbsp;<a class="" id="content-box__login__text--link" href="registrierung.php">löschen!</a></p>-->
 
 
                 </div>

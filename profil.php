@@ -12,9 +12,14 @@ else {
   header('Location: login.php');
 }
 
+
+//Validierung der Felder:
+
+
 $error = false;
 $height_error = "";
 $weight_error = "";
+
 if(!empty($_POST['update-height'])) // Überprüfung, ob Button geklickt wurde
 {
 
@@ -110,7 +115,7 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
 
                         <li class="menu-box-mobile__nav__login small-12">
                             <a class="menu-box-mobile__nav__element__link" href="login.php">
-                                <img src="images/login-mobile.svg" class="menu-box-mobile__nav__login--img" alt="Login-Button" title="Login">Login</a>
+                                <img src="images/login-mobile.svg" class="menu-box-mobile__nav__login--img" alt="Logout-Button" title="Logout">Logout</a>
                         </li>
 
                         <li class="menu-box-mobile__nav__element small-12">
@@ -123,10 +128,6 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
 
                         <li class="menu-box-mobile__nav__element small-12">
                             <a class="menu-box-mobile__nav__element__link" href="#">Support</a>
-                        </li>
-
-                        <li class="menu-box-mobile__nav__element small-12">
-                            <a class="menu-box-mobile__nav__element__link" href="warum-wasser.php">Warum Wasser?</a>
                         </li>
 
 
@@ -144,11 +145,11 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
                     </li>
 
                     <li class="menu-box__nav__logo small-4 small-offset-1 medium-2 medium-offset-2 large-2 large-offset-3 flex-center cell">
-                        <a href="index.php"><img src="images/logo/sodastream.svg" class="menu-box__nav__logo--img" alt="Logo Text: SodaStream" title="Logo"></a>
+                        <a href="#"><img src="images/logo/sodastream.svg" class="menu-box__nav__logo--img" alt="Logo Text: SodaStream" title="Logo"></a>
                     </li>
 
                     <li class="menu-box__nav__login small-2 medium-1 medium-offset-4 large-1 large-offset-4 cell">
-                            <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Login-Button" title="Login"></a>
+                            <a href="login.php"><img src="images/login.svg" class="menu-box__nav__login--img" alt="Logout-Button" title="Logout"> Logout</a>
                     </li>
                     
                 </ul>
@@ -193,11 +194,11 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
 
             <div class="content-box__profil__veränderung grid-x row">
         
-                <h3 class="content-box__profil__veränderung--headline small-offset-3">Körpergröße aktuell:</h3>
+           <!--     <h3 class="content-box__profil__veränderung--headline small-offset-3">Körpergröße aktuell:</h3>
 
                 <div class="content-box__profil__veränderung--aktuell small-4 small-offset-4 medium-offset-7">
                     
-                        <!-- HIER DIE AKTUELLE KÖRPERGRÖSSE AUSGEBEN -->
+                         HIER DIE AKTUELLE KÖRPERGRÖSSE AUSGEBEN 
 
                      <?php
 /*
@@ -207,7 +208,7 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
                         $db_height = mysql_query($sql);
                         if ( ! $db_height )
                         {
-                        die('Ungültige Abfrage: ' . mysqli_error());
+                        die('Ungültige Abfrage: ' . mysql_error());
                         }
                         
                         echo '<table border="1">';
@@ -215,31 +216,13 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
                         {
                         echo "<tr>";
                         echo "<td>". $zeile['height'] . "</td>";
-                        /*echo "<td>". $zeile['nachname'] . "</td>";
-                        echo "<td>". $zeile['vorname'] . "</td>";
-                        echo "<td>". $zeile['akuerzel'] . "</td>";
-                        echo "<td>". $zeile['strasse'] . "</td>";
-                        echo "<td>". $zeile['plz'] . "</td>";
-                        echo "<td>". $zeile['telefon'] . "</td>";
                         echo "</tr>";
                         }
                         echo "</table>";
                         
-                        mysqli_free_result( $db_height );
+                        mysql_free_result( $db_height );
 
-*/
-
-                        $sql = "SELECT height, weight FROM sodastream.user WHERE email = '".$_SESSION['loggedin']."';";
-                        error_log ($sql);
-
-                        $ergebnis = mysqli_query($sql);
-                        error_log($ergebnis);
-                        
-                        while($row = mysqli_fetch_object($ergebnis))
-                            {
-                            echo $row->height;
-                            }
-
+                            */
                     ?>
                                                
 
@@ -247,7 +230,7 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
 
                             180 cm
                        
-                </div>
+                </div>-->
 
                 <h3 class="content-box__profil__veränderung--headline small-offset-3">Körpergröße neu:</h3>
 
@@ -269,14 +252,14 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
     
             <div class="content-box__profil__veränderung grid-x row">
         
-                <h3 class="content-box__profil__veränderung--headline small-offset-3">Gewicht aktuell:</h3>
+              <!--   <h3 class="content-box__profil__veränderung--headline small-offset-3">Gewicht aktuell:</h3>
 
                 <div class="content-box__profil__veränderung--aktuell small-4 small-offset-5 medium-offset-7">
                     
-                        <!-- HIER DAS AKTUELLE GEWICHT AUSGEBEN -->
+                        HIER DAS AKTUELLE GEWICHT AUSGEBEN 
                         75 kg
 
-                </div>
+                </div>-->
 
                 <h3 class="content-box__profil__veränderung--headline small-offset-3">Gewicht neu:</h3>
 
@@ -292,18 +275,12 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
 
             </div>
 
-            <div class="content-box__profil small-9 small-offset-2 medium-4 medium-offset-1 large-6 large-offset-1 grid-x">
+           <!-- <div class="content-box__profil small-9 small-offset-2 medium-4 medium-offset-1 large-6 large-offset-1 grid-x">
 
                 <h2 class="content-box__profil__wasserkonsum--headline medium-8">Dein Wasserkonsum</h2>
 
-            </div>
+            </div>-->
 
-
-
-
-
-
-       
     
     </main>
 
