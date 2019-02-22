@@ -6,7 +6,6 @@ require('mysqlconnector.php');
 session_start();
 $mysqlconnector = new MysqlConnector("localhost", "niclas", "password");
 
-
 if(!empty($_SESSION['loggedin']))
   error_log ('Eingeloggt');
 else {
@@ -200,7 +199,48 @@ if(!empty($_POST['update-weight'])) // Überprüfung, ob Button geklickt wurde
                     
                         <!-- HIER DIE AKTUELLE KÖRPERGRÖSSE AUSGEBEN -->
 
-                     
+                     <?php
+/*
+                        $sql = "SELECT height FROM sodastream.user WHERE email = '".$_SESSION['loggedin']."';";
+                        error_log ($sql);
+
+                        $db_height = mysql_query($sql);
+                        if ( ! $db_height )
+                        {
+                        die('Ungültige Abfrage: ' . mysqli_error());
+                        }
+                        
+                        echo '<table border="1">';
+                        while  ($row=mysql_fetch_row($db_height))
+                        {
+                        echo "<tr>";
+                        echo "<td>". $zeile['height'] . "</td>";
+                        /*echo "<td>". $zeile['nachname'] . "</td>";
+                        echo "<td>". $zeile['vorname'] . "</td>";
+                        echo "<td>". $zeile['akuerzel'] . "</td>";
+                        echo "<td>". $zeile['strasse'] . "</td>";
+                        echo "<td>". $zeile['plz'] . "</td>";
+                        echo "<td>". $zeile['telefon'] . "</td>";
+                        echo "</tr>";
+                        }
+                        echo "</table>";
+                        
+                        mysqli_free_result( $db_height );
+
+*/
+
+                        $sql = "SELECT height, weight FROM sodastream.user WHERE email = '".$_SESSION['loggedin']."';";
+                        error_log ($sql);
+
+                        $ergebnis = mysqli_query($sql);
+                        error_log($ergebnis);
+                        
+                        while($row = mysqli_fetch_object($ergebnis))
+                            {
+                            echo $row->height;
+                            }
+
+                    ?>
                                                
 
 

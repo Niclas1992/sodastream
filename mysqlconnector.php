@@ -145,28 +145,16 @@ public function insert_water_consum($input, $email){
 
 public function get_height_and_weight($email){
 
-  /* HIER FUNKTIONIERT IRGENDETWAS MIT DEM ARRAY NICHT. 
-  ERRORLOGS:
-  
-  PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /Applications/MAMP/htdocs/Projekt_SodaStream/mysqlconnector.php:151
-Stack trace:
-#0 /Applications/MAMP/htdocs/Projekt_SodaStream/web-app.php(213): MysqlConnector->get_height_and_weight('niclas@web.de')
-#1 {main}
-  thrown in /Applications/MAMP/htdocs/Projekt_SodaStream/mysqlconnector.php on line 151
-
-  IM INTERNET LESE ICH DAZU NUR ETWAS VON FETCH, VERSTEHE ES ABER LEIDER NICHT. KANNST DU HELFEN?
-  */
-
-  $userparam = array();
-  $sqlselect = "SELECT height, weight FROM sodastream.user WHERE email = '" .$email . "';";
-  $userparamfromdb = $this->connection->query($sqlselect);
-  foreach($userparamfromdb AS $userparam) {
-    array_push($userparam, $userparamfromdb[0]['height']);
-    array_push($userparam, $userparamfromdb[1]['weight']);
+$size = array();
+ $sqlselect = "SELECT height, weight FROM sodastream.user WHERE email = '" .$email . "';";
+ $userdatafromdb = $this->connection->query($sqlselect);
+ while ($zeileausdatenbank = $userdatafromdb->fetch_object()){
+         $size['weight'] = $zeileausdatenbank->weight;
+         $size['height'] = $zeileausdatenbank->height;
  }
-  return $userparam;
-}
 
+ return $size;
+}
 
 
   /* Gibt die täglichen Wasserwerte des jeweiligen Nutzers aus */
@@ -186,7 +174,7 @@ Stack trace:
 
     VIELEN DANK OTTI!
     */
-    
+
     $water_for_user = array();
     $sqlselect = "SELECT * FROM sodastream.user WHERE user_id = " .$user . " AND created_at = " . $created_at; 
     $watersfromdb = $this->connection->query($sqlselect); 

@@ -209,11 +209,17 @@ else {
                           <!--   2,5l HIER DIE AUSGABE DER BISHERIGEN WASSERMENGE DES TAGES-->
 
                             <?php
-                              
-                                    $userparam = $mysqlconnector->get_height_and_weight($_SESSION['loggedin']);
-                                    error_log($userparam);
-                                    error_log("height:".$userparam[0].", weight:".$userparam[1]);
-                                    $liter = water_calculator::calculate_daily_water($userparam[0], $userparam[1]);
+                                    $daily_water = $mysqlconnector->get_height_and_weight($_SESSION['loggedin']);
+                                    //hier sagt er, dass error_log ein string und kein array erwartet:
+                                    error_log('schnelles String'); 
+                                    
+
+                                    //keine Ausgabe hier
+                                    error_log("height:".$size['height'].", weight:".$size['weight']);
+
+                                    $liter = water_calculator::calculate_daily_water($size['height'], $size['weight']);//
+                                    
+                                    //calculator bekommt werte nicht und gibt deshalb 1. wert aus
                                     error_log($liter);
                                     echo $liter . "l";
                             ?>
